@@ -1,36 +1,18 @@
 const output = document.querySelector('#root');
 
-const increment = count => () => render(count + 1);
+const increment = count => () => setTimeout(
+    () => render(count + 1),
+    5000
+);
 const decrement = count => () => render(count - 1);
 
-class ExcitedCounter{
-    constructor(){
-        this.clicks = 0;
-    }
+const Counter = count => {
+    const counter = document.createElement('h1');
 
-    onClick(count){
-        this.clicks++;
+    counter.innerHTML = `The Count is: ${count}`;
 
-        render(count);
-    }
-
-    render(count){
-        const counter = document.createElement('h1');
-
-        counter.style = `color: rgb(${this.clicks * 10}, 0, 0)`;
-        counter.textContent = `The Count is: ${count}`;
-
-        counter.addEventListener(
-            'click',
-            () => this.onClick(count)
-        );
-
-        return counter;
-    }
-}
-
-const counter = new ExcitedCounter();
-const Counter = counter.render.bind(counter);
+    return counter;
+};
 
 const Up = count => {
     const button = document.createElement('button');

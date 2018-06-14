@@ -1,6 +1,10 @@
 const output = document.querySelector('#root');
 
-const increment = count => () => render(count + 1);
+const increment = count => () => setTimeout(
+    () => render(count + 1),
+    5000
+);
+
 const decrement = count => () => render(count - 1);
 
 const Counter = count => {
