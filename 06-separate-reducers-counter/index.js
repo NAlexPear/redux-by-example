@@ -3,6 +3,7 @@ const output = document.querySelector('#root');
 
 const createStore = (state, reducer) => ({
     state,
+    subscriptions: [],
     getState(){
         return this.state;
     },
@@ -11,7 +12,10 @@ const createStore = (state, reducer) => ({
 
         this.state = newState;
 
-        render();
+        this.subscriptions.forEach(listener => listener());
+    },
+    subscribe(listener){
+        this.subscriptions.push(listener);
     }
 });
 
@@ -72,5 +76,7 @@ const render = () => {
         output.appendChild(Element(count));
     });
 };
+
+store.subscribe(render);
 
 render();

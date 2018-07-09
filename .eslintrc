@@ -226,7 +226,7 @@
         "prefer-rest-params": "off",
         "prefer-spread": "off",
         "prefer-template": "off",
-        "quote-props": "error",
+        "quote-props": "off",
         "quotes": [
             "error",
             "single",

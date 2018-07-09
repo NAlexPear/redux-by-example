@@ -2,6 +2,7 @@ const output = document.querySelector('#root');
 
 const createStore = state => ({
     state,
+    subscriptions: [],
     getState(){
         return this.state;
     },
@@ -10,7 +11,10 @@ const createStore = state => ({
 
         this.state = newState;
 
-        render();
+        this.subscriptions.forEach(listener => listener());
+    },
+    subscribe(listener){
+        this.subscriptions.push(listener);
     }
 });
 
@@ -18,7 +22,7 @@ const store = createStore(0);
 
 const increment = () => setTimeout(
     () => store.dispatch(count => count + 1),
-    5000
+    2000
 );
 
 const decrement = () => store.dispatch(count => count - 1);
@@ -60,5 +64,7 @@ const render = () => {
         output.appendChild(Element(count));
     });
 };
+
+store.subscribe(render);
 
 render();
